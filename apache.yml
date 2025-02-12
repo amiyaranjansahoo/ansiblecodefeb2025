@@ -1,0 +1,13 @@
+- name: Instal apache # Name of the playbook
+  hosts: apache # Name of the taregt nodes(alias)
+  become: yes # True / TRUE, need root user/super user
+  
+  tasks:
+    - name: Installing the apache
+      dnf:
+        name: httpd
+        state: present
+    - name: Start the apache
+      service:
+        name: httpd
+        state: started
