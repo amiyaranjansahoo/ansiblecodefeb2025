@@ -1,0 +1,29 @@
+- name: Instal, start and deploy apache
+  hosts: apache
+  become: yes
+
+  tasks:
+    - name: Installing the apache
+      dnf:
+        name: httpd
+        state: present
+    - name: Start the apache
+      service:
+        name: httpd
+        state: started
+    - name: Deploy the static page
+      copy:
+        src: /home/ec2-user/practise/index.html
+        dest: /var/www/html/
+    - name: Ensure the default Apache port is 9090
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen ' # any line starting with Listen
+        insertafter: '^#Listen '
+        line: Listen 9090
+      notify: ReStart the apache1
+  handlers:
+    - name: ReStart the apache1
+      service:
+        name: httpd
+        state: restarted 

@@ -1,7 +1,7 @@
-- name: Instal apache # Name of the playbook
-  hosts: apache # Name of the taregt nodes(alias)
-  become: yes # True / TRUE, need root user/super user
-  
+- name: Instal, start and deploy apache 
+  hosts: apache 
+  become: yes 
+
   tasks:
     - name: Installing the apache
       dnf:
@@ -11,3 +11,7 @@
       service:
         name: httpd
         state: started
+    - name: Deploy the static page
+      copy:
+        src: /home/ec2-user/practise/index.html
+        dest: /var/www/html/
