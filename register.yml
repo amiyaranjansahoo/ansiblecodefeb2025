@@ -1,0 +1,11 @@
+- name: Understanding the command module
+  hosts: apache
+  become: yes
+  
+  tasks:
+    - name: command module
+      command: uptime
+      register: result
+    - name: Display using debug module
+      debug: 
+        var: result.stdout

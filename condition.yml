@@ -1,0 +1,15 @@
+- name: Instaling the apache using the condition
+  hosts: apache
+  become: yes
+
+  tasks:
+    - name: Installing the apache in AMI2023
+      dnf:
+        name: httpd
+        state: present
+      when: ansible_facts.distribution_major_version == "2023"
+    - name: Installing the apache in AMI2
+      yum:
+        name: httpd
+        state: present
+      when: ansible_facts.distribution_major_version == "2"

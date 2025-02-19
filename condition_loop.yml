@@ -1,0 +1,25 @@
+- name: Installing apache, git, docker, zip using the loop
+  hosts: apache
+  become: yes
+
+  tasks:
+    - name: Installing the "{{ item }}" using the loop
+      dnf:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - httpd
+        - git
+        - docker
+        - zip
+      when: ansible_facts.distribution_major_version == "2023"
+    - name: Installing the "{{ item }}" using the loop
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - httpd
+        - git
+        - docker
+        - zip
+      when: ansible_facts.distribution_major_version == "2"      

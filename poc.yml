@@ -1,0 +1,14 @@
+- name: User creation using the loop
+  hosts: apache
+  become: yes
+
+  tasks:
+    - name: User creation using the loop
+      user:
+        name: "{{ item }}"
+        password: password_hash('sha512', 'mysecretsalt')
+      loop:
+        - user1
+        - user2
+        - user3
+        - user4

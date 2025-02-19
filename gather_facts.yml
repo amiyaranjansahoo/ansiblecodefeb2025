@@ -1,0 +1,8 @@
+- name: Gather facts
+  hosts: apache
+  become: yes
+
+  tasks:
+    - name: gather facts
+      debug:
+        var: ansible_facts

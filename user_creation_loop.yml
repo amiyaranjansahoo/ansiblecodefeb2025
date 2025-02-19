@@ -1,0 +1,13 @@
+- name: User creation using the loop
+  hosts: apache
+  become: yes
+
+  tasks:
+    - name: User creation using the loop
+      user:
+        name: "{{ item }}"
+      loop:
+        - user1
+        - user2
+        - user3
+        - user4

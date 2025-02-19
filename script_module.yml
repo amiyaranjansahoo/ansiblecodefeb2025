@@ -1,0 +1,7 @@
+- name: Understanding the script module
+  hosts: apache
+  become: yes
+  
+  tasks:
+    - name: script module
+      script: /home/ec2-user/practise/myscript.sh
